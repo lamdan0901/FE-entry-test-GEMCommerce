@@ -1,7 +1,13 @@
 import { ChangeEvent, useState } from "react";
+import { UnitSwitcher, ValueChanger } from "./components";
 import { UnitType } from "./type";
-import { UnitSwitcher } from "./UnitSwitcher";
-import { ValueChanger } from "./ValueChanger";
+import {
+  ensureSingleDecimalPoint,
+  ensureValidMinusSign,
+  normalizeDecimalSeparator,
+  parseNumericValue,
+  removeInvalidCharacters,
+} from "./helper";
 
 const App = () => {
   const [unit, setUnit] = useState<UnitType>("%");
@@ -20,29 +26,15 @@ const App = () => {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const rawInput = e.target.value;
 
-    // Replace comma with dot
-    let processedInput = rawInput.replace(",", ".");
-
-    // Filter out non-numeric characters except for the decimal point
-    processedInput = processedInput.replace(/[^0-9.]/g, "");
-
-    // Ensure there's only one decimal point
-    const parts = processedInput.split(".");
-    if (parts.length > 2) {
-      processedInput = parts[0] + "." + parts.slice(1).join("");
-    }
+    const processedInput = [
+      normalizeDecimalSeparator,
+      removeInvalidCharacters,
+      ensureValidMinusSign,
+      ensureSingleDecimalPoint,
+    ].reduce((input, fn) => fn(input), rawInput);
 
     setInputValue(processedInput);
-
-    // Convert to number if valid
-    if (processedInput) {
-      const numValue = parseFloat(processedInput);
-      if (!isNaN(numValue)) {
-        setValue(numValue);
-      }
-    } else {
-      setValue(0);
-    }
+    setValue(parseNumericValue(processedInput));
   };
 
   const handleBlur = (): void => {

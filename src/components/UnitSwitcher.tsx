@@ -1,4 +1,4 @@
-import { UnitType } from "./type";
+import { UnitType } from "../type";
 
 interface UnitSwitcherProps {
   currentUnit: UnitType;
