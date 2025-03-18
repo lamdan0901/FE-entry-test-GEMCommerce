@@ -34,6 +34,7 @@ export const ValueChanger = ({
             className={`size-9 flex justify-center disabled:cursor-auto rounded-l-lg hover:bg-[#3B3B3B] shrink-0 items-center cursor-pointer disabled:hover:bg-transparent disabled:text-[#3B3B3B]`}
             onClick={onDecrement}
             disabled={isPercentage && value <= 0}
+            aria-label="decrement"
           >
             <MinusIcon />
           </button>
@@ -41,6 +42,7 @@ export const ValueChanger = ({
 
         <input
           type="text"
+          data-testid="value-input"
           value={inputValue}
           onChange={onChange}
           onBlur={onBlur}
@@ -55,6 +57,7 @@ export const ValueChanger = ({
             className={`size-9 flex justify-center disabled:cursor-auto rounded-r-lg hover:bg-[#3B3B3B] shrink-0 items-center cursor-pointer disabled:hover:bg-transparent disabled:text-[#3B3B3B]`}
             onClick={onIncrement}
             disabled={isPercentage && value >= 100}
+            aria-label="increment"
           >
             <PlusIcon />
           </button>
