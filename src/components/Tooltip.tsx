@@ -56,7 +56,7 @@ export const Tooltip = ({ text, show, children }: TooltipProps) => {
             <div className="px-2 py-1 text-xs text-[#F9F9F9] bg-[#424242] rounded-lg whitespace-nowrap">
               {text}
             </div>
-            <div className="size-2 bg-[#424242] rotate-45 absolute left-1/2 -translate-x-1/2 -bottom-[2px]" />
+            <div className="size-2 bg-[#424242] rotate-45 absolute left-1/2 -translate-x-1/2 -bottom-[2px] z-[-1]" />
           </div>,
           document.getElementById("tooltip-root") || document.body
         )}

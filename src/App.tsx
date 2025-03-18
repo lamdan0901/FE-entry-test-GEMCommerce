@@ -11,8 +11,8 @@ import {
 
 const App = () => {
   const [unit, setUnit] = useState<UnitType>("%");
-  const [value, setValue] = useState<number>(1.0);
-  const [inputValue, setInputValue] = useState<string>("1.0");
+  const [value, setValue] = useState<number>(0);
+  const [inputValue, setInputValue] = useState<string>("0");
 
   const handleUnitChange = (newUnit: UnitType): void => {
     setUnit(newUnit);
